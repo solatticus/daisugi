@@ -1,3 +1,5 @@
+<img width="2230" height="695" alt="Screenshot_20260416_224042" src="https://github.com/user-attachments/assets/65d3875f-4a5a-4bf2-b844-cc41666c8930" />
+
 # Daisugi
 
 https://en.wikipedia.org/wiki/Daisugi
