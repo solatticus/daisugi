@@ -1,0 +1,29 @@
+[model]
+base = "Qwen/Qwen3-8B"
+threshold = 0.5                 # ternary snap threshold (matches GGML TQ2_0: round + clamp)
+device = "cuda"                 # "cuda" for Iz, "mps" for Poet
+# attn = "flash_attention_2"    # auto: flash_attention_2 on cuda, sdpa on mps
+# skip = ["norm"]               # module name patterns to keep full precision
+                                # MoE models: ["norm", "gate"]
+
+[training]
+epochs = 3
+batch_size = 1
+grad_accum = 8                  # effective batch = 8
+lr = 2e-5
+weight_decay = 0.0              # Adafactor handles its own decay
+max_grad_norm = 1.0
+max_seq_len = 2048
+warmup_steps = 100
+compile = false                 # torch.compile (cuda only)
+
+# Optimizer: "adafactor" for large models (near-zero state memory)
+#            "adamw"     for small models (standard, needs 2x param memory)
+optimizer = "adafactor"
+
+[data]
+train = "./data/train.jsonl"
+
+[output]
+dir = "./output"
+log_every = 10
